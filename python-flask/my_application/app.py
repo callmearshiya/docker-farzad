@@ -23,7 +23,7 @@ def listfiles():
 def euler1():
     # Calculate the sum of all the multiples of 3 or 5 below 1000
     total = sum ( num for num in xrange(1000) if not (num % 3 and num % 5) )
-    str_total str(total)
+    str_total = str(total)
     return str_total
 
 @app.route("/euler2")
