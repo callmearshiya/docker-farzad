@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import request
 import os
+
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -9,42 +11,41 @@ def hello():
 
 @app.route("/listfiles")
 def listfiles():
-  # Get files list in /uploads directory and store them into a list
-  direc = os.listdir("./uploads")
-  #Convert List to String
-  dirs = str(direc)
-  # Get rid of the symboles in String
-  dirs = dirs.translate(None, "[]',")
-  return dirs
+    # Get files list in /uploads directory and store them into a list
+    direc = os.listdir("./uploads")
+    #Convert List to String
+    dirs = str(direc)
+    # Get rid of the symboles in String
+    dirs = dirs.translate(None, "[]',")
+    return dirs
 
-@app.route("/Euler1")
-          def euler1():
-          total( num for num in xrange(1000) if not (num % 3 and num % 5) )
-          return total
+@app.route("/euler1")
+def euler1():
+    # Calculate the sum of all the multiples of 3 or 5 below 1000
+    total = sum ( num for num in xrange(1000) if not (num % 3 and num % 5) )
+    return total
 
-@app.route("/Euler2")
-        def euler2():
-        
-    def fib():
-        a,b = 0,1
-        while True:
-            yield a
-            a,b = b, a+b
+@app.route("/euler2")
+def euler2():
+    # Set the starter sum, firstand second number, and calculate next number in serie
+    eventsum = 0
+    fib1 = 1
+    fib2 = 1
+    nextnum = fib1 + fib2
+    # Check if next number is less than 4000000. If so it sums up else it scapes and swap numbers
+    while (nextnum < 4000000):
+            if ( nextnum % 2 == 0 ):
+                   eventsum = eventsum + nextnum
+                   fib1 = fib2
+                   fib2 = nextnum
+                   nextnum = fib1 + fib2
+            else:
+                   fib1 = fib2
+                   fib2 = nextnum
+                   nextnum = fib1 + fib2
 
-    def even(seq):
-        for number in seq:
-            if not number % 2:
-                yield number
-
-    def under_a_million(seq):
-        for number in seq:
-            if number > 1000000:
-                break
-            yield number   
-
-    return sum(even(under_a_million(fib())))
+    return eventsum
           
-  
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
