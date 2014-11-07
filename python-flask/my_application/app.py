@@ -23,19 +23,20 @@ def listfiles():
 def euler1():
     # Calculate the sum of all the multiples of 3 or 5 below 1000
     total = sum ( num for num in xrange(1000) if not (num % 3 and num % 5) )
-    return total
+    str_total str(total)
+    return str_total
 
 @app.route("/euler2")
 def euler2():
     # Set the starter sum, firstand second number, and calculate next number in serie
-    eventsum = 0
+    evensum = 0
     fib1 = 1
     fib2 = 1
     nextnum = fib1 + fib2
     # Check if next number is less than 4000000. If so it sums up else it scapes and swap numbers
     while (nextnum < 4000000):
             if ( nextnum % 2 == 0 ):
-                   eventsum = eventsum + nextnum
+                   evensum = evensum + nextnum
                    fib1 = fib2
                    fib2 = nextnum
                    nextnum = fib1 + fib2
@@ -44,7 +45,8 @@ def euler2():
                    fib2 = nextnum
                    nextnum = fib1 + fib2
 
-    return eventsum
+    str_evensum = str(evensum)
+    return str_evensum
           
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
